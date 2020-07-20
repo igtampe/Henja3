@@ -1,21 +1,50 @@
 ﻿using Igtampe.BasicWindows;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Igtampe.Henja3.Windows.WindowElements {
     public class LeftRightSelect:Textbox {
 
         private List<String> Items;
-        public int SelectedItem;
+        private int selectedItem;
 
-        public Textbox(Window Parent, List<String> Items, int Length,int LeftPos,int TopPos,ConsoleColor BG,ConsoleColor HighlightedBG,ConsoleColor FG) : base(Parent) { }
-
-
-        public override void DrawElement() {
-            throw new NotImplementedException();
+        public int SelectedItem {
+            get { return selectedItem; }
+            set { 
+                selectedItem = value % Items.Count;
+                Text = Items[selectedItem];
+            }
         }
+
+
+        public LeftRightSelect(Window Parent, List<String> Items, int Length,int LeftPos,int TopPos,ConsoleColor BG,ConsoleColor HighlightedBG,ConsoleColor FG) : base(Parent,Length,LeftPos,TopPos,BG,HighlightedBG,FG) {
+            this.Items = Items;
+            SelectedItem = 0;
+        }
+
+        public override KeyPressReturn OnKeyPress(ConsoleKeyInfo Key) {
+            switch(Key.Key) {
+                case ConsoleKey.LeftArrow:
+                    SelectedItem--;
+                    break;
+                case ConsoleKey.RightArrow:
+                    SelectedItem++;
+                    break;
+                case ConsoleKey.Enter:
+                case ConsoleKey.DownArrow:
+                    return KeyPressReturn.NEXT_ELEMENT;
+                case ConsoleKey.UpArrow:
+                    return KeyPressReturn.PREV_ELEMENT;
+                case ConsoleKey.Tab:
+                    if(Key.Modifiers == ConsoleModifiers.Shift) { return KeyPressReturn.PREV_ELEMENT; }
+                    return KeyPressReturn.NEXT_ELEMENT;
+                default:
+                    return KeyPressReturn.NOTHING;
+            }
+            DrawElement();
+            return KeyPressReturn.NOTHING;
+
+        }
+
     }
 }

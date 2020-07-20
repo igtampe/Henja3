@@ -1,9 +1,5 @@
 ﻿using Igtampe.BasicWindows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Igtampe.Henja3.Windows.WindowElements {
     public class NumericalTextBox:Textbox {

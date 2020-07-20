@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace Igtampe.Henja3.Windows.WindowElements {
     public class Textbox:WindowElement {
 
-        private readonly int Length;
-        private readonly ConsoleColor BG;
-        private readonly ConsoleColor HighlightedBG;
-        private readonly ConsoleColor FG;
+        protected readonly int Length;
+        protected readonly ConsoleColor BG;
+        protected readonly ConsoleColor HighlightedBG;
+        protected readonly ConsoleColor FG;
 
         public string Text { get; set; }
 
@@ -23,6 +23,7 @@ namespace Igtampe.Henja3.Windows.WindowElements {
             this.BG = BG;
             this.HighlightedBG = HighlightedBG;
             this.FG = FG;
+            Text = "";
         }
 
         public override KeyPressReturn OnKeyPress(ConsoleKeyInfo Key) {

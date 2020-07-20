@@ -13,7 +13,7 @@ namespace Igtampe.Henja3.Windows.WindowElements {
             }
         }
 
-        private int MaximumVal;
+        private readonly int MaximumVal;
 
         public NumericalTextBox(Window Parent,int MaximumVal,int Length,int LeftPos,int TopPos,ConsoleColor BG,ConsoleColor HighlightedBG,ConsoleColor FG) : base(Parent,Length,LeftPos,TopPos,BG,HighlightedBG,FG) {
             this.MaximumVal = MaximumVal;
@@ -28,10 +28,8 @@ namespace Igtampe.Henja3.Windows.WindowElements {
 
                 if(OldText != Text) {
                     //if the text was modified update value
-                    int tempval = -5;
-                    Int32.TryParse(Text,out tempval);
-                    if(tempval == -5) { Value = 0; } else { Value = tempval; }
-                
+                    if(Int32.TryParse(Text,out int tempval)) { Value = tempval; }
+
                 } 
                 DrawElement();
                 return Return;

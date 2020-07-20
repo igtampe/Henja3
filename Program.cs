@@ -88,7 +88,7 @@ namespace Igtampe.Henja3 {
                 CurrentKey = Console.ReadKey(true);
 
                 //Save the file
-                if(CurrentKey.Modifiers == ConsoleModifiers.Control && CurrentKey.Key == ConsoleKey.S) {
+                if(CurrentKey.Modifiers == ConsoleModifiers.Control) {
                     switch(CurrentKey.Key) {
                         case ConsoleKey.S:
                             File.WriteAllLines(Filename,CurrentDocument);
@@ -130,7 +130,7 @@ namespace Igtampe.Henja3 {
             if(Console.WindowWidth < 80) {Console.SetWindowSize(80,Console.WindowHeight);}
             if(Console.WindowHeight < 25) { Console.SetWindowSize(Console.WindowWidth,25); }
 
-            RenderUtils.Color(ConsoleColor.DarkBlue,ConsoleColor.White);
+            RenderUtils.Color(ConsoleColor.DarkCyan,ConsoleColor.White);
             Console.Clear();
 
             Draw.Row(ConsoleColor.Black,Console.WindowWidth-1,0,0);

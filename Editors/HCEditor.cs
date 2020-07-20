@@ -1,6 +1,7 @@
 ﻿using Igtampe.BasicGraphics;
 using Igtampe.BasicRender;
 using Igtampe.BasicWindows.ExampleWindows;
+using Igtampe.Henja3.Windows;
 using System;
 using System.Text;
 
@@ -44,7 +45,13 @@ namespace Igtampe.Henja3.Editors {
                     CustomColor = true;
                     break;
                 case ConsoleKey.C:
-                    new HelloWorldWindow().Execute();
+                    HiColorPicker Picker = new HiColorPicker();
+                    Picker.Execute();
+                    if(Picker.OK()) {
+                        ColorString = Picker.GetResultColorString();
+                        CustomColor = true;
+                    }
+                    Render(ref Document,false);
                     break;
                 case ConsoleKey.Spacebar:
                     //Replace the text at that position

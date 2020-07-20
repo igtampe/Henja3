@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Igtampe.Henja3.Windows.WindowElements {
     public class LeftRightSelect:Textbox {
 
-        private List<String> Items;
+        private readonly List<String> Items;
         private int selectedItem;
 
         public int SelectedItem {

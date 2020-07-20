@@ -13,7 +13,7 @@ namespace Igtampe.Henja3.Windows.WindowElements {
 
         public int SliderPosition {
             get { return sliderPosition; }
-            set { sliderPosition = value % Length; }
+            set { sliderPosition = Math.Min(Length-1,Math.Max(0,value)); }
         }
         
 

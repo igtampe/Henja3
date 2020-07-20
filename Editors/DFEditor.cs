@@ -27,7 +27,7 @@ namespace Igtampe.Henja3.Editors {
                     break;
                 case ConsoleKey.K:
                     //Pick Color
-                    try { CurrentColorWheelPosition = ColorWheel.IndexOf(Document[Y][X]); } catch { CurrentColorWheelPosition = 0; }
+                    CurrentColorWheelPosition = ColorWheel.IndexOf(Document[Y][X]);
                     break;
                 case ConsoleKey.Spacebar:
                     //Replace the text at that position

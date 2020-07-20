@@ -60,6 +60,7 @@
     <Compile Include="Windows\ErrorWindow.cs" />
     <Compile Include="Windows\HiColorPicker.cs" />
     <Compile Include="Windows\NewFileWindow.cs" />
+    <Compile Include="Windows\WindowElements\FlaggedCloseButton.cs" />
     <Compile Include="Windows\WindowElements\LeftRightSelect.cs" />
     <Compile Include="Windows\WindowElements\NumericalTextBox.cs" />
     <Compile Include="Windows\WindowElements\Slider.cs" />

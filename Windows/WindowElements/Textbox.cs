@@ -60,7 +60,7 @@ namespace Igtampe.Henja3.Windows.WindowElements {
             String DrawText = Text;
             if(DrawText.Length > Length) { DrawText = DrawText.Remove(0,DrawText.Length-Length); }
 
-            Draw.Sprite(Text,Color,FG,LeftPos+Parent.LeftPos,TopPos+Parent.TopPos);
+            Draw.Sprite(DrawText,Color,FG,LeftPos+Parent.LeftPos,TopPos+Parent.TopPos);
 
         }
     }

@@ -11,7 +11,7 @@ namespace Igtampe.Henja3.Windows.WindowElements {
         public int SelectedItem {
             get { return selectedItem; }
             set { 
-                selectedItem = value % Items.Count;
+                selectedItem = Math.Abs(value % Items.Count);
                 Text = Items[selectedItem];
             }
         }

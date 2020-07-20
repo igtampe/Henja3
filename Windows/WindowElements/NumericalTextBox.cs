@@ -8,7 +8,7 @@ namespace Igtampe.Henja3.Windows.WindowElements {
 
         public int Value {
             get { return val; }
-            set { val = Math.Max(value,MaximumVal);
+            set { val = Math.Min(value,MaximumVal);
                 Text = val.ToString();
             }
         }
@@ -26,7 +26,13 @@ namespace Igtampe.Henja3.Windows.WindowElements {
                 String OldText = Text;
                 Return = base.OnKeyPress(Key);
 
-                if(OldText != Text) {Value = Int32.Parse(Text); } //if the text was modified update value
+                if(OldText != Text) {
+                    //if the text was modified update value
+                    int tempval = -5;
+                    Int32.TryParse(Text,out tempval);
+                    if(tempval == -5) { Value = 0; } else { Value = tempval; }
+                
+                } 
                 DrawElement();
                 return Return;
 

@@ -45,14 +45,75 @@ namespace Igtampe.Henja3 {
                 }
 
                 CurrentDocument = File.ReadAllLines(Filename);
-                Redraw();
+                Type();
 
-            } else { 
+            } else {
                 //new file
+                NewFileWindow FileWindow = new NewFileWindow();
+                FileWindow.Execute();
+                if(FileWindow.OKButton.Flag) {
+
+                    Filename = FileWindow.Namebox.Text;
+
+                    switch(FileWindow.ModeBox.SelectedItem) {
+                        case 0:
+                            Editor = new DFEditor();
+                            if(!Filename.ToUpper().EndsWith(".DF")) { Filename += ".df"; }
+                            break;
+                        case 1:
+                            Editor = new HCEditor();
+                            if(!Filename.ToUpper().EndsWith(".HC")) { Filename += ".hc"; }
+                            break;
+                        default:
+                            return;
+                    }
+
+                    CurrentDocument=Editor?.GenerateNew(FileWindow.XBox.Value,FileWindow.YBox.Value);
+                    Type();
+                }
 
             }
             RenderUtils.Pause();
 
+        }
+
+        private static void Type() {
+
+            ConsoleKeyInfo CurrentKey;
+            Redraw();
+
+            while(true) {
+
+                RenderUtils.SetPos(CurrentX,CurrentY + 1);
+                CurrentKey = Console.ReadKey(true);
+
+                //Save the file
+                if(CurrentKey.Modifiers == ConsoleModifiers.Control && CurrentKey.Key == ConsoleKey.S) { File.WriteAllLines(Filename,CurrentDocument); } 
+                else {
+                    switch(CurrentKey.Key) {
+                        case ConsoleKey.LeftArrow:
+                            CurrentX = Math.Max(0,CurrentX - 1);
+                            break;
+                        case ConsoleKey.RightArrow:
+                            CurrentX = Math.Min(Editor.GetWidth(CurrentDocument)-1,CurrentX + 1);
+                            break;
+                        case ConsoleKey.UpArrow:
+                            CurrentY = Math.Max(0,CurrentY - 1);
+                            break;
+                        case ConsoleKey.DownArrow:
+                            CurrentY = Math.Max(CurrentDocument.Length,CurrentY + 1);
+                            break;
+                        default:
+                            Editor.KeyPress(ref CurrentDocument, CurrentX,CurrentY,CurrentKey);
+                            break;
+                    }
+                
+                }
+
+
+            }
+
+        
         }
 
         private static void Redraw() {
@@ -67,7 +128,7 @@ namespace Igtampe.Henja3 {
 
             Draw.Sprite("Henja 3 | " + Editor?.GetName(),ConsoleColor.Black,ConsoleColor.White,0,0);
 
-            Editor?.Render(ref CurrentDocument);
+            Editor?.Render(ref CurrentDocument,false);
 
 
         }

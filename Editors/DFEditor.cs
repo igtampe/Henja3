@@ -20,7 +20,7 @@ namespace Igtampe.Henja3.Editors {
                     break;
                 case ConsoleKey.PageDown:
                     //Move down in the color wheel
-                    CurrentColorWheelPosition++;
+                    CurrentColorWheelPosition--;
                     CurrentColorWheelPosition %= ColorWheel.Length;
                     break;
                 case ConsoleKey.K:
@@ -32,28 +32,32 @@ namespace Igtampe.Henja3.Editors {
                     StringBuilder TempString = new StringBuilder(Document[Y]);
                     TempString[X] = ColorWheel[CurrentColorWheelPosition];
                     Document[Y] = TempString.ToString() ;
+                    BasicGraphic.DrawColorString(ColorWheel[CurrentColorWheelPosition] + "");
                     break;
                 default:
                     return;
             }
 
-            Render(ref Document);
+            Render(ref Document,true);
 
         }
 
-        public void Render(ref String[] Document) {
-            
+        public void Render(ref String[] Document,Boolean Partial) {
+
             //Draw the stored graphic
-            int X = 1;
-            foreach(String Line in Document) {
-                RenderUtils.SetPos(0,X);
-                BasicGraphic.DrawColorString(Line);
-                X++;
+            if(!Partial) {
+                int X = 1;
+                foreach(String Line in Document) {
+                    RenderUtils.SetPos(0,X);
+                    BasicGraphic.DrawColorString(Line);
+                    X++;
+                }
             }
 
             //Draw the color wheel
             RenderUtils.SetPos(Console.WindowWidth - ColorWheel.Length - 2,Console.WindowHeight - 2);
             BasicGraphic.DrawColorString(ColorWheel);
+            Draw.Row(ConsoleColor.Black,ColorWheel.Length,Console.WindowWidth - ColorWheel.Length - 2,Console.WindowHeight - 1);
             Draw.Block(ConsoleColor.Red,Console.WindowWidth - ColorWheel.Length - 2 + CurrentColorWheelPosition,Console.WindowHeight - 1);
 
             Draw.Sprite("Use PGUP/PGDOWN to change colors, K to pick color, and SPACE to draw.",ConsoleColor.Black,ConsoleColor.White,0,Console.WindowHeight-1);
@@ -62,7 +66,7 @@ namespace Igtampe.Henja3.Editors {
 
         public string[] GenerateNew(int X,int Y) {
             String[] ReturnArray = new string[Y-1];
-            for(int y = 0; y < Y; y++) {
+            for(int y = 0; y < Y-1; y++) {
                 ReturnArray[y] = "";
 
                 for(int x = 0; x < X; x++) {ReturnArray[y] += "F";}
@@ -72,6 +76,7 @@ namespace Igtampe.Henja3.Editors {
         }
 
         public string GetName() { return "DF Editor"; }
+        public int GetWidth(String[] Document) { return Document[0].Length; }
 
     }
 }

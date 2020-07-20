@@ -3,7 +3,8 @@
 namespace Igtampe.Henja3.Editors {
     public interface IHenjaEditor {
         void KeyPress(ref String[] Document,int X, int Y, ConsoleKeyInfo Key);
-        void Render(ref String[] Document);
+        void Render(ref String[] Document, Boolean Partial);
+        int GetWidth(String[] Document);
         String GetName();
         String[] GenerateNew(int X,int Y);
     }

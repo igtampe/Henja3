@@ -28,7 +28,7 @@ namespace Igtampe.Henja3 {
 
             Console.Title = "Henja BasicGraphic Editor [Version 3.0] " + string.Join(" ",args);
 
-            Redraw();
+            Redraw(true);
 
             if(args.Length == 1) {
                 //Load a file.
@@ -80,7 +80,7 @@ namespace Igtampe.Henja3 {
         private static void Type() {
 
             ConsoleKeyInfo CurrentKey;
-            Redraw();
+            Redraw(false);
 
             while(true) {
 
@@ -88,8 +88,18 @@ namespace Igtampe.Henja3 {
                 CurrentKey = Console.ReadKey(true);
 
                 //Save the file
-                if(CurrentKey.Modifiers == ConsoleModifiers.Control && CurrentKey.Key == ConsoleKey.S) { File.WriteAllLines(Filename,CurrentDocument); } 
-                else {
+                if(CurrentKey.Modifiers == ConsoleModifiers.Control && CurrentKey.Key == ConsoleKey.S) {
+                    switch(CurrentKey.Key) {
+                        case ConsoleKey.S:
+                            File.WriteAllLines(Filename,CurrentDocument);
+                            break;
+                        case ConsoleKey.R:
+                            Redraw(false);
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
                     switch(CurrentKey.Key) {
                         case ConsoleKey.LeftArrow:
                             CurrentX = Math.Max(0,CurrentX - 1);
@@ -101,7 +111,7 @@ namespace Igtampe.Henja3 {
                             CurrentY = Math.Max(0,CurrentY - 1);
                             break;
                         case ConsoleKey.DownArrow:
-                            CurrentY = Math.Max(CurrentDocument.Length,CurrentY + 1);
+                            CurrentY = Math.Min(CurrentDocument.Length-1,CurrentY + 1);
                             break;
                         default:
                             Editor.KeyPress(ref CurrentDocument, CurrentX,CurrentY,CurrentKey);
@@ -116,7 +126,7 @@ namespace Igtampe.Henja3 {
         
         }
 
-        private static void Redraw() {
+        private static void Redraw(Boolean Partial) {
             if(Console.WindowWidth < 80) {Console.SetWindowSize(80,Console.WindowHeight);}
             if(Console.WindowHeight < 25) { Console.SetWindowSize(Console.WindowWidth,25); }
 
@@ -126,9 +136,9 @@ namespace Igtampe.Henja3 {
             Draw.Row(ConsoleColor.Black,Console.WindowWidth-1,0,0);
             Draw.Box(ConsoleColor.Black,Console.WindowWidth-1,2,0,Console.WindowHeight - 2);
 
-            Draw.Sprite("Henja 3 | " + Editor?.GetName(),ConsoleColor.Black,ConsoleColor.White,0,0);
+            Draw.Sprite("Henja 3 | " + Editor?.GetName() + " | "+ Filename,ConsoleColor.Black,ConsoleColor.White,0,0);
 
-            Editor?.Render(ref CurrentDocument,false);
+            Editor?.Render(ref CurrentDocument,Partial);
 
 
         }

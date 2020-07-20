@@ -17,11 +17,13 @@ namespace Igtampe.Henja3.Editors {
                     //Move up in the color wheel
                     CurrentColorWheelPosition++;
                     CurrentColorWheelPosition %= ColorWheel.Length;
+                    CurrentColorWheelPosition = Math.Abs(CurrentColorWheelPosition);
                     break;
                 case ConsoleKey.PageDown:
                     //Move down in the color wheel
                     CurrentColorWheelPosition--;
                     CurrentColorWheelPosition %= ColorWheel.Length;
+                    CurrentColorWheelPosition = Math.Abs(CurrentColorWheelPosition);
                     break;
                 case ConsoleKey.K:
                     //Pick Color

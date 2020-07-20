@@ -17,8 +17,8 @@ namespace Igtampe.Henja3.Editors {
         public int CurrentColorWheelPosition {
             get { return currentColorWheelPosition; }
             set { 
-                currentColorWheelPosition = value;
-                ColorString = GetHiColorString(value);
+                currentColorWheelPosition = Math.Abs(value % ColorWheel.Split('-').Length);
+                ColorString = GetHiColorString(currentColorWheelPosition);
                 CustomColor = false;
             }
         }        
@@ -33,12 +33,10 @@ namespace Igtampe.Henja3.Editors {
                 case ConsoleKey.PageUp:
                     //Move up in the color wheel
                     CurrentColorWheelPosition++;
-                    CurrentColorWheelPosition %= ColorWheel.Length;
                     break;
                 case ConsoleKey.PageDown:
                     //Move down in the color wheel
                     CurrentColorWheelPosition--;
-                    CurrentColorWheelPosition %= ColorWheel.Length;
                     break;
                 case ConsoleKey.K:
                     //Pick Color

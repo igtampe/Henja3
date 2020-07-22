@@ -96,7 +96,7 @@ namespace Igtampe.Henja3.Editors {
 
         public string[] GenerateNew(int X,int Y) {
             String[] ReturnArray = new string[Y - 1];
-            for(int y = 0; y < Y; y++) {
+            for(int y = 0; y < Y-1; y++) {
                 ReturnArray[y] = "";
                 for(int x = 0; x < X; x++) { ReturnArray[y] += "FF0-"; }
                 ReturnArray[y]=ReturnArray[y].TrimEnd('-');

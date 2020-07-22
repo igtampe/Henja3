@@ -18,7 +18,8 @@ namespace Igtampe.Henja3.Editors {
         public int CurrentColorWheelPosition {
             get { return currentColorWheelPosition; }
             set { 
-                currentColorWheelPosition = Math.Abs(value % ColorWheel.Split('-').Length);
+                currentColorWheelPosition = value % ColorWheel.Split('-').Length;
+                if(currentColorWheelPosition<0) { currentColorWheelPosition = ColorWheel.Split('-').Length-1; }
                 ColorString = GetHiColorString(currentColorWheelPosition);
                 CustomColor = false;
             }

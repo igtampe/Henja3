@@ -7,7 +7,14 @@ namespace Igtampe.Henja3.Editors {
     public class DFEditor:IHenjaEditor {
 
         private const string ColorWheel = "4C6EA23B9315D087F";
-        private int CurrentColorWheelPosition;
+        private int currentColorWheelPosition;
+        private int CurrentColorWheelPosition {
+            get { return currentColorWheelPosition; }
+            set {
+                currentColorWheelPosition = value % ColorWheel.Length;
+                if(currentColorWheelPosition < 0) { currentColorWheelPosition = ColorWheel.Length - 1; }
+            }
+        }
 
         public DFEditor() {CurrentColorWheelPosition = 0;}
 
@@ -16,14 +23,10 @@ namespace Igtampe.Henja3.Editors {
                 case ConsoleKey.PageUp:
                     //Move up in the color wheel
                     CurrentColorWheelPosition++;
-                    CurrentColorWheelPosition %= ColorWheel.Length;
-                    CurrentColorWheelPosition = Math.Abs(CurrentColorWheelPosition);
                     break;
                 case ConsoleKey.PageDown:
                     //Move down in the color wheel
                     CurrentColorWheelPosition--;
-                    CurrentColorWheelPosition %= ColorWheel.Length;
-                    CurrentColorWheelPosition = Math.Abs(CurrentColorWheelPosition);
                     break;
                 case ConsoleKey.K:
                     //Pick Color

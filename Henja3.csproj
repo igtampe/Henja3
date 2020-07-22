@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>HenjaIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BasicGraphics">
       <HintPath>A:\Downloads\Programs\TestPrograms\BasicGraphics.dll</HintPath>
@@ -69,5 +72,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="HenjaIcon.ico" />
+    <Content Include="Images\Henja3Logo.png" />
+    <Content Include="Images\HenjaInAction.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

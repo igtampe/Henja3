@@ -33,7 +33,7 @@ namespace Igtampe.Henja3.Windows {
             Rainbow RainbowGraphic = new Rainbow();
 
 
-            Label MegaLabel = new Label(this,"Color 1:                   Shade: ░▒▓\n\n" +
+            Label MegaLabel = new Label(this,"Color 1:                   Shade: ░▒▓\n\n\n" +
                                              "Color 2:",ConsoleColor.Gray,ConsoleColor.Black,1,2);
             Image Rainbow1 = new Image(this,RainbowGraphic,10,2);
             Image Rainbow2 = new Image(this,RainbowGraphic,10,5);
